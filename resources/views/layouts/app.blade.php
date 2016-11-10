@@ -58,8 +58,8 @@
                                     分类 <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">查看分类</a></li>
-                                    <li><a href="#">添加分类</a></li>
+                                    <li><a href="{{url('admin/category')}}">查看分类</a></li>
+                                    <li><a href="{{url('admin/category/create')}}">添加分类</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">

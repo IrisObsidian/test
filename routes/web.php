@@ -17,4 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::group(['middleware' => 'admin'],function (){
+    Route::get('/home', 'HomeController@index');
+    Route::group(['prefix' => 'admin'],function (){
+        Route::resource('category','CategoryController');
+    });
+});
