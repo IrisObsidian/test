@@ -6,8 +6,8 @@
         <div class="col-xs-12 text-center">
             <div class="table-responsive">
                 <table class="table table-bordered">
-                    <caption style="font-size: 20px;margin-bottom: 25px;">系统基本信息</caption>
-                    <tbody style="line-height: 40px;">
+                    <caption style="font-size: 22px;margin-bottom: 25px;">系统基本信息</caption>
+                    <tbody>
                     <tr>
                         <td>操作系统：</td>
                         <td>{{PHP_OS}}</td>
