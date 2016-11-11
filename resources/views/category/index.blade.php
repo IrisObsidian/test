@@ -25,8 +25,8 @@
                         <th>{{$value->created_at}}</th>
                         <th>{{$value->updated_at}}</th>
                         <th>
-                            <a href="{{url('admin/category/'.$value->id.'/edit')}}">修改</a>
-                            <a href="#">删除</a>
+                            <a href="{{url('admin/category/'.$value->id.'/edit')}}">修改</a><br>
+                            <a onclick="del({{$value->id}})">删除</a>
                         </th>
                     </tr>
                 @endforeach
@@ -34,4 +34,17 @@
             </table>
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        function del(cate_id) {
+            layer.confirm('您确定删除该分类吗？', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                $.post("{{url('admin/category/')}}",{'_token':'{{csrf_token()}}','_method':'delete'},function (data) {
+                    layer.msg(data,{icon:6});
+                });
+            });
+        }
+    </script>
 @endsection
