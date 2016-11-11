@@ -38,8 +38,11 @@ class CategoryController extends Controller
         return back()->with('errors','修改分类信息失败,请稍后重试！');
     }
     //DELETE | admin/category/{category} | category.destroy | App\Http\Controllers\CategoryController@destroy
-    public function destroy($cate_id)
+    //无法读取到JS的变量，需要的参数以表单提交的形式传递
+    public function destroy(/*$cate_id*/)
     {
-        return "成功访问destroy函数，参数为".$cate_id;
+        if (Category::where('id',Input::all()['cate_id'])->delete())
+            return $data = ['status'=>1,'id'=>Input::all()['cate_id'],'msg'=>'分类删除成功'];
+        return $data = ['status'=>0,'msg'=>'分类删除失败'];
     }
 }

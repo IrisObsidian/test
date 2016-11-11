@@ -16,8 +16,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($data as $k=>$value)
-                    <tr>
+                @foreach($data as $value)
+                    <tr id="{{$value->id}}">
                         <th>{{$value->id}}</th>
                         <th>{{$value->name}}</th>
                         <th>{{$value->keywords}}</th>
@@ -25,7 +25,7 @@
                         <th>{{$value->created_at}}</th>
                         <th>{{$value->updated_at}}</th>
                         <th>
-                            <a href="{{url('admin/category/'.$value->id.'/edit')}}">修改</a><br>
+                            <a href="{{url('admin/category/'.$value->id.'/edit')}}">修改</a>
                             <a onclick="del({{$value->id}})">删除</a>
                         </th>
                     </tr>
@@ -41,8 +41,15 @@
             layer.confirm('您确定删除该分类吗？', {
                 btn: ['确定','取消'] //按钮
             }, function(){
-                $.post("{{url('admin/category/')}}",{'_token':'{{csrf_token()}}','_method':'delete'},function (data) {
-                    layer.msg(data,{icon:6});
+                //不知道如何在blade模板中读取JS的变量
+                $.post("{{url('admin/category/1')}}",{'_token':'{{csrf_token()}}','_method':'delete','cate_id':cate_id},function (data) {
+                    if(data.status)
+                    {
+                        $("#"+data.id).remove();
+                        layer.msg(data.msg,{icon:1});
+                    }
+                    else
+                        layer.msg(data.msg,{icon:2});
                 });
             });
         }

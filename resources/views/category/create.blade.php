@@ -24,7 +24,7 @@
             <div class="form-group" style="font-size: 18px;">
                 <label for="description" class="col-sm-2 control-label" style="font-weight: normal;">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述：</label>
                 <div class="col-sm-10 text-left">
-                    <textarea name="description" id="description" class="col-sm-12" rows="5">{{\Illuminate\Support\Facades\Session::get('data')['description']}}</textarea>
+                    <textarea name="description" id="description" class="col-sm-12" rows="8">{{\Illuminate\Support\Facades\Session::get('data')['description']}}</textarea>
                 </div>
             </div>
             <input type="hidden" name="created_at" value="{{time()}}">
