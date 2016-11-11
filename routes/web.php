@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','WelcomeController@index');
 
 Auth::routes();
 
@@ -21,5 +19,6 @@ Route::group(['middleware' => 'admin'],function (){
     Route::get('/home', 'HomeController@index');
     Route::group(['prefix' => 'admin'],function (){
         Route::resource('category','CategoryController');
+        Route::resource('article','ArticleController');
     });
 });

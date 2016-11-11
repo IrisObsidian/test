@@ -25,8 +25,8 @@
                         <th>{{$value->created_at}}</th>
                         <th>{{$value->updated_at}}</th>
                         <th>
-                            <a href="{{url('admin/category/'.$value->id.'/edit')}}">修改</a>
-                            <a onclick="del({{$value->id}})">删除</a>
+                            <p><a href="{{url('admin/category/'.$value->id.'/edit')}}">修改</a></p>
+                            <p><a onclick="del({{$value->id}})">删除</a></p>
                         </th>
                     </tr>
                 @endforeach
