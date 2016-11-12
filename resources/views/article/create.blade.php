@@ -2,7 +2,7 @@
 @section('content')
     <div class="container text-center">
         <div class="row">
-            <div class="col-sm-12" style="font-size: 22px;margin-bottom: 25px;">新增文章</div>
+            <div class="col-sm-12" style="font-size: 22px;margin-bottom: 10px;">新增文章</div>
             <form action="{{url('admin/article')}}" class="form-horizontal" role="form" method="post" style="font-size: 18px;">
                 {{csrf_field()}}
                 <div class="form-group">

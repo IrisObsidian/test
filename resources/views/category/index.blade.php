@@ -41,8 +41,7 @@
             layer.confirm('您确定删除该分类吗？', {
                 btn: ['确定','取消'] //按钮
             }, function(){
-                //不知道如何在blade模板中读取JS的变量
-                $.post("{{url('admin/category/1')}}",{'_token':'{{csrf_token()}}','_method':'delete','cate_id':cate_id},function (data) {
+                $.post("{{url('admin/category')}}"+"/"+cate_id,{'_token':'{{csrf_token()}}','_method':'delete'},function (data) {
                     if(data.status)
                     {
                         $("#"+data.id).remove();

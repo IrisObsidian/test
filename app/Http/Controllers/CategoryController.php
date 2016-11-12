@@ -11,7 +11,10 @@ class CategoryController extends Controller
     //GET|HEAD | admin/category | category.index | App\Http\Controllers\CategoryController@index
     public function index()
     {
-        return view('category/index')->with('data',Category::orderBy('updated_at','asc')->get());
+        $data = Category::orderBy('updated_at','asc')->get();
+        if (count($data) == 0)
+            return view('category/create')->with('errors','您尚无分类，请添加！');
+        return view('category/index')->with('data',$data);
     }
     //GET|HEAD | admin/category/create | category.create | App\Http\Controllers\CategoryController@create
     public function create()
@@ -23,7 +26,7 @@ class CategoryController extends Controller
     {
         if (Category::create(Input::except('_token')))
             return redirect('admin/category');
-        return back()->with('errors','新增分类信息失败,请稍后重试！')->with('data',Input::except('_token','created_at','updated_at'));
+        return back()->with('errors','新增分类失败,请稍后重试！')->with('data',Input::except('_token','created_at','updated_at'));
     }
     //GET|HEAD | admin/category/{category}/edit | category.edit | App\Http\Controllers\CategoryController@edit
     public function edit($cate_id)
@@ -38,11 +41,10 @@ class CategoryController extends Controller
         return back()->with('errors','修改分类信息失败,请稍后重试！');
     }
     //DELETE | admin/category/{category} | category.destroy | App\Http\Controllers\CategoryController@destroy
-    //无法读取到JS的变量，需要的参数以表单提交的形式传递
-    public function destroy(/*$cate_id*/)
+    public function destroy($cate_id)
     {
-        if (Category::where('id',Input::all()['cate_id'])->delete())
-            return $data = ['status'=>1,'id'=>Input::all()['cate_id'],'msg'=>'分类删除成功'];
+        if (Category::where('id',$cate_id)->delete())
+            return $data = ['status'=>1,'id'=>$cate_id,'msg'=>'分类删除成功'];
         return $data = ['status'=>0,'msg'=>'分类删除失败'];
     }
 }
