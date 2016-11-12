@@ -3,7 +3,12 @@
     <div class="container text-center">
         <div class="row">
             <div class="col-sm-12" style="font-size: 22px;margin-bottom: 15px;">新增文章</div>
-            <form action="{{url('admin/article')}}" class="form-horizontal" role="form" method="post" style="font-size: 18px;">
+            @if(!is_null(\Illuminate\Support\Facades\Session::get('error')))
+                <div style="font-size: 16px;margin-bottom: 15px;">
+                    <p style="color: red;">{{\Illuminate\Support\Facades\Session::get('error')}}</p>
+                </div>
+            @endif
+            <form action="{{url('admin/article')}}" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" style="font-size: 18px;">
                 {{csrf_field()}}
                 <div class="form-group">
                     <label for="cate_id" class="col-sm-2 control-label">所属分类：</label>
@@ -31,7 +36,7 @@
                 <div class="form-group">
                     <label for="thumbnail" class="col-sm-2 control-label">缩&nbsp;&nbsp;略&nbsp;&nbsp;图&nbsp;：</label>
                     <div class="col-sm-10">
-                        <input type="file" class="form-control" name="thumbnail">
+                        <input class="form-control" name="thumbnail" type="file">
                     </div>
                 </div>
                 <div class="form-group">
@@ -51,6 +56,9 @@
                         </style>
                     </div>
                 </div>
+                <input type="hidden" name="views" value="0">
+                <input type="hidden" name="created_at" value="{{time()}}">
+                <input type="hidden" name="updated_at" value="{{time()}}">
                 <div class="form-group">
                     <div class="col-sm-offset-5 col-sm-2">
                         <button type="submit" class="btn btn-default">提交</button>
