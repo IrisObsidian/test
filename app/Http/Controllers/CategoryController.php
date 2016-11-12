@@ -43,6 +43,13 @@ class CategoryController extends Controller
     //DELETE | admin/category/{category} | category.destroy | App\Http\Controllers\CategoryController@destroy
     public function destroy($cate_id)
     {
+//        if (Category::where('id',$cate_id)->delete())
+//            if (count(Category::all())>0)
+//                return $data = ['status'=>1,'id'=>$cate_id,'msg'=>'分类删除成功'];
+//            else
+//                return redirect('admin/category')->with('errors','您尚无分类，请添加！');
+//        else
+//            return $data = ['status'=>0,'msg'=>'分类删除失败'];
         if (Category::where('id',$cate_id)->delete())
             return $data = ['status'=>1,'id'=>$cate_id,'msg'=>'分类删除成功'];
         return $data = ['status'=>0,'msg'=>'分类删除失败'];

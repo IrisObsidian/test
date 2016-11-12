@@ -6,7 +6,6 @@
                 <caption style="font-size: 22px;margin-bottom: 25px;">分类信息列表</caption>
                 <thead>
                 <tr>
-                    <th>id</th>
                     <th>name</th>
                     <th>keywords</th>
                     <th>description</th>
@@ -18,7 +17,6 @@
                 <tbody>
                 @foreach($data as $value)
                     <tr id="{{$value->id}}">
-                        <th>{{$value->id}}</th>
                         <th>{{$value->name}}</th>
                         <th>{{$value->keywords}}</th>
                         <th>{{$value->description}}</th>

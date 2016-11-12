@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('content')
     <div class="container text-center">
-        <div class="col-sm-12" style="font-size: 22px;margin-bottom: 10px;">新增分类</div>
+        <div class="col-sm-12" style="font-size: 22px;margin-bottom: 15px;">新增分类</div>
         @if(!is_null(\Illuminate\Support\Facades\Session::get('errors')))
-            <div style="font-size: 16px;margin-bottom: 10px;">
+            <div style="font-size: 16px;margin-bottom: 15px;">
                 <p style="color: red;">{{\Illuminate\Support\Facades\Session::get('errors')}}</p>
             </div>
         @elseif(count($errors)>0)
-            <div style="font-size: 16px;margin-bottom: 10px;">
+            <div style="font-size: 16px;margin-bottom: 15px;">
                 <p style="color: red;">{{$errors}}</p>
             </div>
         @endif

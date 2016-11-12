@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Input;
 
 class ArticleController extends Controller
 {
-    //GET|HEAD  | admin/article/create | article.create   | App\Http\Controllers\ArticleController@create
+    //GET|HEAD  | admin/article/create | article.create | App\Http\Controllers\ArticleController@create
     public function create()
     {
         return view('article/create')->with('cate',Category::all());
@@ -17,5 +17,10 @@ class ArticleController extends Controller
     public function store()
     {
         dd(Input::all());
+    }
+    //GET|HEAD | admin/article | article.index | App\Http\Controllers\ArticleController@index
+    public function index()
+    {
+        return "index";
     }
 }
