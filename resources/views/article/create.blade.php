@@ -11,12 +11,12 @@
             <form action="{{url('admin/article')}}" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" style="font-size: 18px;">
                 {{csrf_field()}}
                 <div class="form-group">
-                    <label for="cate_id" class="col-sm-2 control-label">所属分类：</label>
+                    <label for="cate_name" class="col-sm-2 control-label">所属分类：</label>
                     <div class="col-sm-10">
-                        <select name="cate_id" class="form-control">
-                            <option value="0">Default</option>
+                        <select name="cate_name" class="form-control">
+                            <option value="default">Default</option>
                             @foreach($cate as $value)
-                                <option value="{{$value->id}}">{{$value->name}}</option>
+                                <option value="{{$value->name}}">{{$value->name}}</option>
                             @endforeach
                         </select>
                     </div>
