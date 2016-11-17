@@ -1,36 +1,44 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-fluid">
+    <div class="container-fluid text-center">
         <div class="row">
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <caption style="font-size: 22px;margin-bottom: 15px;">文章列表信息</caption>
-                    <thead>
-                    <tr>
-                        <th>title</th>
-                        <th>keywords</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>产品1</td>
-                        <td>23/11/2013</td>
-                        <td>待发货</td></tr>
-                    <tr>
-                        <td>产品2</td>
-                        <td>10/11/2013</td>
-                        <td>发货中</td></tr>
-                    <tr>
-                        <td>产品3</td>
-                        <td>20/10/2013</td>
-                        <td>待确认</td></tr>
-                    <tr>
-                        <td>产品4</td>
-                        <td>20/10/2013</td>
-                        <td>已退货</td></tr>
-                    </tbody>
-                </table>
+            <div class="col-sm-12">
+                <form></form>
+            </div>
+            <div class="col-sm-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <caption style="font-size: 22px;margin-bottom: 15px;">文章列表信息</caption>
+                        <thead>
+                        <tr>
+                            <th>title</th>
+                            <th>keywords</th>
+                            <th>thumbnail</th>
+                            <th>content</th>
+                            <th>created_at</th>
+                            <th>updated_at</th>
+                            <th>options</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($data as $value)
+                            <tr>
+                                <td>{{$value->title}}</td>
+                                <td>{{$value->keywords}}</td>
+                                <td><img src="{{asset('img/'.$value->thumbnail)}}" width="100px" height="100px" alt=""></td>
+                                <td>{!! $value->content !!}</td>
+                                <td>{{$value->created_at}}</td>
+                                <td>{{$value->updated_at}}</td>
+                                <td>
+                                    <p><a href="">查看</a></p>
+                                    <p><a href="">查看</a></p>
+                                    <p><a href="">查看</a></p>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

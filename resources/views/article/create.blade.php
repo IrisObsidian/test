@@ -12,7 +12,7 @@
                 {{csrf_field()}}
                 <div class="form-group">
                     <label for="cate_name" class="col-sm-2 control-label">所属分类：</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-3">
                         <select name="cate_name" class="form-control">
                             <option value="default">Default</option>
                             @foreach($cate as $value)
@@ -35,7 +35,7 @@
                 </div>
                 <div class="form-group">
                     <label for="thumbnail" class="col-sm-2 control-label">缩&nbsp;&nbsp;略&nbsp;&nbsp;图&nbsp;：</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input class="form-control" name="thumbnail" type="file">
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                 <input type="hidden" name="updated_at" value="{{time()}}">
                 <div class="form-group">
                     <div class="col-sm-offset-5 col-sm-2">
-                        <button type="submit" class="btn btn-default">提交</button>
+                        <button type="submit" class="btn btn-default btn-primary">提交</button>
                     </div>
                 </div>
             </form>

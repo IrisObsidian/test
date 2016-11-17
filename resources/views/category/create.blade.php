@@ -35,7 +35,7 @@
             <input type="hidden" name="updated_at" value="{{time()}}">
             <div class="form-group">
                 <div class="col-sm-offset-5 col-sm-2">
-                    <button type="submit" class="btn btn-default">提交</button>
+                    <button type="submit" class="btn btn-default btn-primary">提交</button>
                 </div>
             </div>
         </form>

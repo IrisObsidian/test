@@ -18,43 +18,41 @@ class ArticleController extends Controller
     //POST      | admin/article | article.store    | App\Http\Controllers\ArticleController@store
     public function store()
     {
-        //提交的信息中，thumbnail保存的临时文件名。先将数据保存下来，在入库之前做修改。
         $input = Input::except('_token');
-        //限制上传的文件只能为.gif或.jpeg,文件大小必须小于100KB
-        if (($_FILES['thumbnail']['type'] == 'image/gif'
-            || $_FILES['thumbnail']['type'] == 'image/jpeg'
-            || $_FILES['thumbnail']['type'] == 'image/pjpeg')
-            && $_FILES['thumbnail']['size'] < 100000)
+        //获取上传的文件信息
+        $file = Input::file('thumbnail');
+        //检测上传文件是否有效
+        if ($file->isValid())
         {
-            //上传文件是否出错
-            if ($_FILES['thumbnail']['error'] > 0)
+            //上传的文件需要为gif、jpg并且大小要小于100KB
+            if ($file->getMimeType() == 'image/gif'
+                || $file->getMimeType() == 'image/jpeg'
+                || $file->getMimeType() == 'image/pjpeg'
+                && $file->getSize < 100000)
             {
-                //返回错误信息
-                return back()->with('error','上传文件失败，错误代码：'.$_FILES['thumbnail']['error'].'!');
-            }
-            else
-            {
-                if (Storage::disk('public')->exists($_FILES['thumbnail']['name']))
-                    return back()->with('error','该文件已存在！');
-                else
+                //移动文件到public/img目录下
+                $file->move('img/',$file->getClientOriginalName());
+                //修改入库的文件名
+                $input['thumbnail'] = $file->getClientOriginalName();
+                //文章内容为空，向数据库插入数据会报错
+                if (isset($input['content']))
                 {
-                    //保存文件
-                    Storage::disk('public')->put($_FILES['thumbnail']['name'],$_FILES['thumbnail']['tmp_name']);
-                    //修改入库信息
-                    $input['thumbnail'] = $_FILES['thumbnail']['name'];
-                    //存入数据库
                     if (Article::create($input))
                         return redirect('admin/article');
                     return back()->with('error','添加文章失败！');
                 }
+                else
+                    return back()->with('error','文章内容不能为空！');
             }
+            else
+                return back()->with('error','只能上传图片并且要求小于100KB');
         }
         else
-            return back()->with('error','无效的文件类型！');
+            return back()->with('error','上传的文件无效！');
     }
     //GET|HEAD | admin/article | article.index | App\Http\Controllers\ArticleController@index
     public function index()
     {
-        return view('article/index')->with('data',Article::all());
+        return view('article/index')->with('data',Article::where('cate_name','=','Default')->get())->with('cate',Category::all());
     }
 }
