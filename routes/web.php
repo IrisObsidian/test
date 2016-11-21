@@ -20,5 +20,6 @@ Route::group(['middleware' => 'admin'],function (){
     Route::group(['prefix' => 'admin'],function (){
         Route::resource('category','CategoryController');
         Route::resource('article','ArticleController');
+        Route::post('article/{cate_name?}','ArticleController@ChangeCate');
     });
 });
