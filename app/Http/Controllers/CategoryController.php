@@ -25,8 +25,8 @@ class CategoryController extends Controller
     public function store()
     {
         if (Category::create(Input::except('_token')))
-            return redirect('admin/category');
-        return back()->with('errors','新增分类失败,请稍后重试！')->with('data',Input::except('_token','created_at','updated_at'));
+            return $status = 1;
+        return $status = 0;
     }
     //GET|HEAD | admin/category/{category}/edit | category.edit | App\Http\Controllers\CategoryController@edit
     public function edit($cate_id)

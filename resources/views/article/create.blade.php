@@ -8,7 +8,7 @@
                     <p style="color: red;">{{\Illuminate\Support\Facades\Session::get('error')}}</p>
                 </div>
             @endif
-            <form action="{{url('admin/article')}}" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" style="font-size: 18px;">
+            <form id="article" class="form-horizontal" role="form" style="font-size: 18px;">
                 {{csrf_field()}}
                 <div class="form-group">
                     <label for="cate_name" class="col-sm-2 control-label">所属分类：</label>
@@ -58,12 +58,13 @@
                 <input type="hidden" name="views" value="0">
                 <input type="hidden" name="created_at" value="{{time()}}">
                 <input type="hidden" name="updated_at" value="{{time()}}">
-                <div class="form-group">
-                    <div class="col-sm-offset-5 col-sm-2">
-                        <button type="submit" class="btn btn-default btn-primary">提交</button>
-                    </div>
-                </div>
             </form>
+            <div class="col-sm-offset-5 col-sm-2">
+                <button class="btn btn-default btn-primary" onclick="commit()">提交</button>
+            </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script></script>
 @endsection
