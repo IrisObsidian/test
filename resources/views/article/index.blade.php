@@ -74,7 +74,9 @@
                     info += '<td>'+data[item]['content'].substr(0,690)+'</td>';
                     info += '<td>'+data[item]['created_at']+'</td>';
                     info += '<td>'+data[item]['updated_at']+'</td>';
-                    info += '<td> <p><a href="{{url('admin/article')}}'+"/"+data[item]['id']+'">查看</a></p><p><a href="">修改</a></p> <p><a href="">删除</a></p> </td>';
+                    info += '<td> ' +
+                            '<p><a href="{{url('admin/article')}}'+"/"+data[item]['id']+'">查看</a></p>' +
+                            '</td>';
                     info += '</tr>';
                 }
                 $('#info').append(info);

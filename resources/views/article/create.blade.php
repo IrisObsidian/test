@@ -3,12 +3,12 @@
     <div class="container text-center">
         <div class="row">
             <div class="col-sm-12" style="font-size: 22px;margin-bottom: 15px;">新增文章</div>
-            @if(!is_null(\Illuminate\Support\Facades\Session::get('error')))
+            @if(!is_null(\Illuminate\Support\Facades\Session::get('errors')))
                 <div style="font-size: 16px;margin-bottom: 15px;">
-                    <p style="color: red;">{{\Illuminate\Support\Facades\Session::get('error')}}</p>
+                    <p style="color: red;">{{\Illuminate\Support\Facades\Session::get('errors')}}</p>
                 </div>
             @endif
-            <form id="article" class="form-horizontal" role="form" style="font-size: 18px;">
+            <form id="article" action="{{url('admin/article')}}" class="form-horizontal" enctype="multipart/form-data" role="form" method="post" style="font-size: 18px;">
                 {{csrf_field()}}
                 <div class="form-group">
                     <label for="cate_name" class="col-sm-2 control-label">所属分类：</label>
@@ -58,10 +58,12 @@
                 <input type="hidden" name="views" value="0">
                 <input type="hidden" name="created_at" value="{{time()}}">
                 <input type="hidden" name="updated_at" value="{{time()}}">
+                <div class="form-group">
+                    <div class="col-sm-offset-5 col-sm-2">
+                        <button type="submit" class="btn btn-primary">提交</button>
+                    </div>
+                </div>
             </form>
-            <div class="col-sm-offset-5 col-sm-2">
-                <button class="btn btn-default btn-primary" onclick="commit()">提交</button>
-            </div>
         </div>
     </div>
 @endsection

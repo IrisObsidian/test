@@ -6,6 +6,7 @@ use App\Article;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -27,10 +28,10 @@ class ArticleController extends Controller
         if ($file->isValid())
         {
             //上传的文件需要为gif、jpg并且大小要小于50KB
-            if ($file->getMimeType() == 'image/gif'
-                || $file->getMimeType() == 'image/jpeg'
-                || $file->getMimeType() == 'image/pjpeg'
-                && $file->getSize < 50000)
+            if (($file->getMimeType() == 'image/gif'
+                    || $file->getMimeType() == 'image/jpeg'
+                    || $file->getMimeType() == 'image/pjpeg')
+                && $file->getSize() < 50000)
             {
                 //移动文件到public/img目录下
                 $file->move('img/',$file->getClientOriginalName());
@@ -41,16 +42,16 @@ class ArticleController extends Controller
                 {
                     if (Article::create($input))
                         return view('article/index')->with('data',Article::where('cate_name','=',$input['cate_name'])->get())->with('cate',Category::all());
-                    return back()->with('error','添加文章失败！')->with('data',$input);
+                    return back()->with('errors','添加文章失败！')->with('data',$input);
                 }
                 else
-                    return back()->with('error','文章内容不能为空！');
+                    return back()->with('errors','文章内容不能为空！');
             }
             else
-                return back()->with('error','只能上传图片并且要求小于50KB');
+                return back()->with('errors','只能上传图片并且要求小于50KB');
         }
         else
-            return back()->with('error','上传的文件无效！');
+            return back()->with('errors','上传的文件无效！');
     }
     //GET|HEAD | admin/article | article.index | App\Http\Controllers\ArticleController@index
     public function index()
@@ -60,7 +61,7 @@ class ArticleController extends Controller
             return redirect('admin/category/create')->with('errors','您尚无分类与文章，添加文章之前需要先添加分类，请先添加分类！');
         else
             if (is_null(Article::first()))
-                return redirect('admin/article/create')->with('error','您尚无文章，请添加！');
+                return redirect('admin/article/create')->with('errors','您尚无文章，请添加！');
             else
                 return view('article/index')->with('data',Article::where('cate_name','=',$cate->name)->get())->with('cate',Category::all());
     }
@@ -79,5 +80,50 @@ class ArticleController extends Controller
     public function edit($art_id)
     {
         return view('article/edit')->with('data',Article::find($art_id))->with('cate',Category::all());
+    }
+    //PUT|PATCH | admin/article/{article} | article.update | App\Http\Controllers\ArticleController@update
+    public function update($art_id)
+    {
+        $input = Input::except('_token','_method');
+        //获取上传的文件信息
+        $file = Input::file('thumbnail');
+        if (is_null($file))
+        {
+            if (Article::where('id',$art_id)->update($input))
+                return view('article/index')->with('data',Article::where('cate_name','=',$input['cate_name'])->get())->with('cate',Category::all());
+            return back()->with('errors','修改文章失败,请稍后重试！');
+        }
+        else
+        {
+            //检测上传文件是否有效
+            if ($file->isValid())
+            {
+                //上传的文件需要为gif、jpg并且大小要小于50KB
+                if (($file->getMimeType() == 'image/gif'
+                        || $file->getMimeType() == 'image/jpeg'
+                        || $file->getMimeType() == 'image/pjpeg')
+                    && $file->getSize() < 50000)
+                {
+                    unlink('img/'.Article::where('id',$art_id)->first()->thumbnail);
+                    //移动文件到public/img目录下
+                    $file->move('img/',$file->getClientOriginalName());
+                    //修改入库的文件名
+                    $input['thumbnail'] = $file->getClientOriginalName();
+                    //文章内容为空，向数据库插入数据会报错
+                    if (isset($input['content']))
+                    {
+                        if (Article::where('id',$art_id)->update($input))
+                            return view('article/index')->with('data',Article::where('cate_name','=',$input['cate_name'])->get())->with('cate',Category::all());
+                        return back()->with('errors','添加文章失败！')->with('data',$input);
+                    }
+                    else
+                        return back()->with('errors','文章内容不能为空！');
+                }
+                else
+                    return back()->with('errors','只能上传图片并且要求小于50KB');
+            }
+            else
+                return back()->with('errors','上传的文件无效！');
+        }
     }
 }
