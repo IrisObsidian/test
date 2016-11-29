@@ -17,7 +17,7 @@
                                 <div class="col-sm-4"><a href="{{url('showart/'.$item->id)}}">{{$item->title}}</a></div>
                                 <div class="col-sm-8">{{$item->keywords}}</div>
                                 <div class="col-sm-4"><img src="{{asset('img/'.$item->thumbnail)}}" width="100px" height="100px" alt=""></div>
-                                <div class="col-sm-8">{!! $item->content !!}</div>
+                                <div class="col-sm-8">{!! substr($item->content,0,690) !!}</div>
                             </div>
                         @endforeach
                     </div>
