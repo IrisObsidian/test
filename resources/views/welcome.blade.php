@@ -14,8 +14,8 @@
                     <div id="text" class="col-sm-11">
                         @foreach($article as $item)
                             <div class="col-sm-12">
-                                <div class="col-sm-3"><a href="{{url('showart/'.$item->id)}}">{{$item->title}}</a></div>
-                                <div class="col-sm-9">{{$item->keywords}}</div>
+                                <div class="col-sm-6"><a href="{{url('showart/'.$item->id)}}">{{$item->title}}</a></div>
+                                <div class="col-sm-6">{{$item->keywords}}</div>
                                 <div class="col-sm-3"><img src="{{asset('img/'.$item->thumbnail)}}" width="100px" height="100px" alt=""></div>
                                 <div class="col-sm-9" {{--style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"--}}>
                                     <textarea name="" id="" cols="120" rows="5">{!! strip_tags($item->content) !!}</textarea>
@@ -37,8 +37,8 @@
                 for(item in data)
                 {
                     text += '<div class="col-sm-12">';
-                    text += '<div class="col-sm-3"><a href="{{url('showart')}}'+"/"+data[item]['id']+'">'+data[item]["title"]+'</a></div>';
-                    text += '<div class="col-sm-9">'+data[item]['keywords']+'</div>';
+                    text += '<div class="col-sm-6"><a href="{{url('showart')}}'+"/"+data[item]['id']+'">'+data[item]["title"]+'</a></div>';
+                    text += '<div class="col-sm-6">'+data[item]['keywords']+'</div>';
                     text += '<div class="col-sm-3"><img src="{{asset('img/')}}'+"/"+data[item]['thumbnail']+'" width="100px" height="100px" alt=""></div>';
                     text += '<div class="col-sm-9"><textarea name="" id="" cols="120" rows="5">'+data[item]['content'].replace(/<[^>]+>/g,"")+'</textarea></div>';
                     text += '</div>';
