@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                @if($error)
+                @if(isset($error))
                     <p class="text-center" style="color: red;font-size: 18px;">{{$error}}</p>
                 @else
                     <div class="col-sm-2">
