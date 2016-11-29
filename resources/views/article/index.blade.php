@@ -41,7 +41,7 @@
                                 <td>{{$value->title}}</td>
                                 <td>{{$value->keywords}}</td>
                                 <td><img src="{{asset('img/'.$value->thumbnail)}}" width="100px" height="100px" alt=""></td>
-                                <td>{!! substr($value->content,0,690) !!}</td>
+                                <td>{!! $value->content !!}</td>
                                 <td>{{$value->created_at}}</td>
                                 <td>{{$value->updated_at}}</td>
                                 <td>
