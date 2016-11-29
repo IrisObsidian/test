@@ -5,7 +5,7 @@
             <div class="col-sm-12 text-center" style="font-size: 22px;font-weight: bolder">{{$data->title}}</div>
             <div class="col-sm-12">关键字：<span style="color: red">{{$data->keywords}}</span></div>
             <div class="col-sm-12">
-                <img src="{{asset('img/'.$data->thumbnail)}}" width="120px" height="120px" style="float: left" alt="">
+                <img src="{{asset('img/'.$data->thumbnail)}}" width="120px" height="120px" style="float: left;margin-right: 15px;" alt="">
                 <span style="text-indent: 2em;">{!! $data->content !!}</span>
             </div>
             <div class="col-sm-12 text-right">

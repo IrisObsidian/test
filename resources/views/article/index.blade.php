@@ -40,8 +40,10 @@
                             <tr id="{{$value->id}}">
                                 <td>{{$value->title}}</td>
                                 <td>{{$value->keywords}}</td>
-                                <td><img src="{{asset('img/'.$value->thumbnail)}}" width="100px" height="100px" alt=""></td>
-                                <td>{!! $value->content !!}</td>
+                                <td><img src="{{asset('img/'.$value->thumbnail)}}" width="100px" height="115px" alt=""></td>
+                                <td>
+                                    <textarea name="" id="" cols="115" rows="5">{!! strip_tags($value->content) !!}</textarea>
+                                </td>
                                 <td>{{$value->created_at}}</td>
                                 <td>{{$value->updated_at}}</td>
                                 <td>
