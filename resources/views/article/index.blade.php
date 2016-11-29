@@ -37,7 +37,7 @@
                         </thead>
                         <tbody id="info">
                         @foreach($data as $value)
-                            <tr>
+                            <tr id="{{$value->id}}">
                                 <td>{{$value->title}}</td>
                                 <td>{{$value->keywords}}</td>
                                 <td><img src="{{asset('img/'.$value->thumbnail)}}" width="100px" height="100px" alt=""></td>
@@ -46,8 +46,8 @@
                                 <td>{{$value->updated_at}}</td>
                                 <td>
                                     <p><a href="{{url('admin/article/'.$value->id)}}">查看</a></p>
-                                    <p><a href="">修改</a></p>
-                                    <p><a href="">删除</a></p>
+                                    <p><a href="{{url('admin/article/'.$value->id.'/edit')}}">修改</a></p>
+                                    <p><a onclick="DelArt({{$value->id}})">删除</a></p>
                                 </td>
                             </tr>
                         @endforeach
@@ -67,7 +67,7 @@
                 //异步更改表内容
                 for (item in data)
                 {
-                    info += '<tr>';
+                    info += '<tr id="'+data[item]['id']+'">';
                     info += '<td>'+data[item]['title']+'</td>';
                     info += '<td>'+data[item]['keywords']+'</td>';
                     info += '<td><img src="{{asset('img/')}}'+"/"+data[item]['thumbnail']+'" width="100px" height="100px"></td>';
@@ -76,11 +76,34 @@
                     info += '<td>'+data[item]['updated_at']+'</td>';
                     info += '<td> ' +
                             '<p><a href="{{url('admin/article')}}'+"/"+data[item]['id']+'">查看</a></p>' +
+                            '<p><a href="{{url('admin/article')}}'+"/"+data[item]['id']+"/"+'edit">修改</a></p>' +
+                            '<p><a onclick="DelArt('+data[item]['id']+')">删除</a></p>' +
                             '</td>';
                     info += '</tr>';
                 }
                 $('#info').append(info);
             });
+        }
+        function DelArt(art_id) {
+            layer.confirm('您确定删除该文章？',{
+                btn:['确定','取消']
+            },function () {
+                $.post("{{url('admin/article')}}"+"/"+art_id,{"_token":"{{csrf_token()}}","_method":"delete"},function (data) {
+                    if (data.status == 1)
+                    {
+                        $("#"+data.id).remove();
+                        layer.confirm(data.msg,{
+                            btn:['确定']
+                        })
+                    }
+                    else
+                    {
+                        layer.confirm(data.msg,{
+                            btn:['确定']
+                        })
+                    }
+                });
+            })
         }
     </script>
 @endsection

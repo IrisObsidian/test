@@ -126,4 +126,11 @@ class ArticleController extends Controller
                 return back()->with('errors','上传的文件无效！');
         }
     }
+    //DELETE | admin/article/{article} | article.destroy  | App\Http\Controllers\ArticleController@destroy
+    public function destroy($art_id)
+    {
+        if (Article::where('id',$art_id)->delete())
+            return $data = ['status'=>1,'id'=>$art_id,'msg'=>'文章删除成功'];
+        return $data = ['status'=>0,'msg'=>'文章删除失败'];
+    }
 }

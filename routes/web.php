@@ -12,6 +12,8 @@
 */
 
 Route::get('/','WelcomeController@index');
+Route::get('/chcate/{cate_name}','WelcomeController@chcate');
+Route::get('/showart/{art_id}','WelcomeController@showart');
 
 Auth::routes();
 
