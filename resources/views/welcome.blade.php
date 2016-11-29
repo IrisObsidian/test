@@ -37,10 +37,10 @@
                 for(item in data)
                 {
                     text += '<div class="col-sm-12">';
-                    text += '<div class="col-sm-4"><a href="{{url('showart')}}'+"/"+data[item]['id']+'">'+data[item]["title"]+'</a></div>';
-                    text += '<div class="col-sm-8">'+data[item]['keywords']+'</div>';
-                    text += '<div class="col-sm-4"><img src="{{asset('img/')}}'+"/"+data[item]['thumbnail']+'" width="100px" height="100px" alt=""></div>';
-                    text += '<div class="col-sm-8">'+data[item]['content']+'</div>';
+                    text += '<div class="col-sm-3"><a href="{{url('showart')}}'+"/"+data[item]['id']+'">'+data[item]["title"]+'</a></div>';
+                    text += '<div class="col-sm-9">'+data[item]['keywords']+'</div>';
+                    text += '<div class="col-sm-3"><img src="{{asset('img/')}}'+"/"+data[item]['thumbnail']+'" width="100px" height="100px" alt=""></div>';
+                    text += '<div class="col-sm-9"><textarea name="" id="" cols="120" rows="5">'+data[item]['content'].replace(/<[^>]+>/g,"")+'</textarea></div>';
                     text += '</div>';
                 }
                 $('#text').append(text);
